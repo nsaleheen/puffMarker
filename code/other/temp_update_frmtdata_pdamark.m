@@ -1,0 +1,17 @@
+function temp_update_frmtdata_pdamark(G,INDIR,OUTDIR)
+indir=[G.DIR.DATA G.DIR.SEP INDIR];
+outdir=[G.DIR.DATA G.DIR.SEP OUTDIR];
+
+files=dir(indir);
+for i=326:length(files)
+    load([indir G.DIR.SEP files(i).name]);
+    disp(files(i).name);
+    x=files(i).name;x=strrep(x,'frmtraw','frmtdata');
+    pdamark=R.pdamark;
+    clear R;
+    load([outdir G.DIR.SEP x]);
+    D.pdamark=pdamark;
+    save([outdir G.DIR.SEP x],'D');
+    clear D;
+end
+end

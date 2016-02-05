@@ -1,0 +1,6 @@
+function weka_train_SMO_smoking(wekafile,modelfile,outfile)
+
+s=['java -cp "','C:\Program Files\Weka-3-6\weka.jar',...
+'" weka.classifiers.functions.SMO -i -C 1.0 -L 0.0010 -P 1.0E-12 -N 0 -M -V -1 -W 1 -K "weka.classifiers.functions.supportVector.Puk -C 250007 -O 1.0 -S 1.0" -t ',...
+wekafile,' -d ',modelfile, '> ' ,outfile];
+dos(s);

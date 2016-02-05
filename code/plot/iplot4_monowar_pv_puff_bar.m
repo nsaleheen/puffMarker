@@ -1,0 +1,191 @@
+function iplot4_monowar_pv_puff_bar(G, pid,sid, INDIR, slist, plotCres,barvalue)
+shiftCress=0;
+
+%color={'r-','g-','b-','y-','m-','c-','w-', 'k-',   'r-','g-','b-','y-','m-','c-','w-', 'k-'};
+color={'g-','b-','m-','g-','b-','m-','c-', 'k-',   'r-','g-','b-','m-','c-', 'k-'};
+%color={'r.','g.','b.','m.','c.', 'k.',   'r.','g.','b.','m.','c.', 'k.'};
+
+indir=[G.DIR.DATA G.DIR.SEP INDIR];
+infile=[pid '_' sid '_' G.FILE.BASICFEATURE_MATNAME];
+if exist([indir G.DIR.SEP infile],'file')~=2,return;end
+load([indir G.DIR.SEP infile]);
+
+% for s=slist
+%     maxS = max(B.sensor{s}.sample);
+%     minS = min(B.sensor{s}.sample);
+%
+%     B.sensor{s}.sampleNorm = (B.sensor{s}.sample-minS)/(maxS-minS);%Scaling from 0 to 1
+%     if s==1,
+%         B.sensor{s}.peakvalley.sampleNorm=(B.sensor{s}.peakvalley.sample-minS)/(maxS-minS);
+%     end
+% end
+
+%figure;
+hh=figure('units','normalized','outerposition',[0 0 1 1]);
+title(['pid=' pid ' sid=' sid]);
+yMax=0;
+for s=slist
+    yMax=yMax+max(B.sensor{s}.sample)+abs(min(B.sensor{s}.sample));
+end
+
+%plot cress data
+if plotCres==1 && isfield(B, 'cress') && length(B.cress.data)>0
+    [T,ia,ic] = unique(datenum(B.cress.data(:,13)));
+    hold on;
+    fromIndex = 1;
+    hSmokingSession=[];
+    hSmokingPuff=[];
+    k=1;
+    %StartTime=13, EndTime=14, TimeToRemoval(ms)=15, TimeToFirstPuff(ms)=16, IPI(ms)=23, Duration(ms)=22
+    for i=1:length(ia)
+        start=datenum(B.cress.data(ia(i),13));
+        endt=datenum(B.cress.data(ia(i),14));
+        %plot_signal([start start],[0 offset],'c',2,0);
+        %plot_signal([endt endt],[0 offset],'c',2,0);
+        hSmokingSession(i) = area([start, endt], [yMax, yMax]);
+        xSmokingSession(i) = area([start+shiftCress, endt+shiftCress], [yMax, yMax]);
+        
+        text((start+endt)/2 + shiftCress, 0  , ['Smoking Session : ' int2str(i)], 'Color', 'k', 'FontSize', 18, 'Rotation', 90);
+        ttStart=start;
+        for j=fromIndex:ia(i)
+            ipi = str2double(B.cress.data(j,23))/(1000*60*60*24);
+            duration = str2double(B.cress.data(j,22))/(1000*60*60*24);
+            hSmokingPuff(k) = area([ttStart+ipi, ttStart+ipi+duration], [yMax, yMax]);
+            xSmokingPuff(k) = area([ttStart+ipi+shiftCress, ttStart+ipi+duration+shiftCress], [yMax, yMax]);
+            
+            text(ttStart+ipi+duration/2+shiftCress, 0  , ['Puff : ' int2str(j-fromIndex+1)], 'Color', 'k', 'FontSize', 18, 'Rotation', 90);
+            ttStart = ttStart+ipi+duration;
+            k=k+1;
+        end
+        fromIndex=ia(i)+1;
+    end
+    
+    hold off;
+    for i=1:numel(hSmokingSession)
+        hc=get(hSmokingSession(i),'children');
+        set(hc,'FaceColor',[1 1 .33], 'EdgeColor', [1 1 .33]);
+        %set(hc,'FaceAlpha',0.5);
+    end
+    %alpha(1.0);
+    for i=1:numel(hSmokingPuff)
+        hc=get(hSmokingPuff(i),'children');
+        %set(hc,'FaceColor',[.5 1 .5], 'EdgeColor', [.5 1 .5]);
+        set(hc,'FaceColor',[1 .5 1], 'EdgeColor', [1 .5 1]);
+        %set(hc,'FaceAlpha',0.5);
+    end
+    for i=1:numel(xSmokingSession)
+        hc=get(xSmokingSession(i),'children');
+        set(hc,'FaceColor',[1 1 .66], 'EdgeColor', [1 1 .66]);
+        %set(hc,'FaceAlpha',0.5);
+    end
+    %alpha(1.0);
+    for i=1:numel(xSmokingPuff)
+        hc=get(xSmokingPuff(i),'children');
+        %set(hc,'FaceColor',[.5 1 .5], 'EdgeColor', [.5 1 .5]);
+        set(hc,'FaceColor',[.5 .2 .2], 'EdgeColor', [.5 .2 .2]);
+        %set(hc,'FaceAlpha',0.5);
+    end
+end
+
+
+
+
+
+offset=yMax;
+i=0;
+h=[];
+for s=slist
+    hold on;
+    offset=offset-max(B.sensor{s}.sample)-abs(min(B.sensor{s}.sample));
+    if isempty(B.sensor{s}.matlabtime)
+        continue;
+    end
+    h(i+1)=plot_signal(B.sensor{s}.matlabtime,B.sensor{s}.sample,color{rem(i,length(color))+1},1,offset);
+    %    B.sensor{s}.sample=exponential_movingavg(B.sensor{s}.sample,100);
+    res=[];
+    tm=[];
+    if s~=1
+        %     for curtime=B.sensor{s}.timestamp(1):5*1000:B.sensor{s}.timestamp(end)
+        %         ind=find(B.sensor{s}.timestamp>=curtime-10*60*1000);
+        %         a1=length(find(B.sensor{s}.sample(ind)>700));
+        %         a2=length(find(B.sensor{s}.sample(ind)<-700));
+        %         if a1>a2, res=[res,500];else res=[res,-500];end;
+        %         tm=[tm, curtime];
+        %     end
+        %     tm=convert_timestamp_matlabtimestamp(G,tm);
+        %     h(i+1)=plot_signal(tm,res,color{rem(i+1,length(color))+1},1,offset);
+        xx=xlim;
+        plot_signal(xx,[barvalue,barvalue],'k--',2,offset);
+        plot_signal(xx,[-barvalue,-barvalue],'k--',2,offset);
+        plot_signal(xx,[0,0],'k-',2,offset);
+        
+    end
+    %     if s==1,
+    %         plot_signal(B.sensor{s}.peakvalley.matlabtime(2:2:end),B.sensor{s}.peakvalley.sample(2:2:end),'b.',1,offset);
+    %         hold on;
+    %
+    %         if isfield(B.cress,'puff_peak')
+    %             for j=1:length(B.cress.puff_peak)
+    %                 if isfield(B.cress,'hand') && ~isempty(B.cress.hand{j})
+    %                     plot_signal([B.cress.hand{j},B.cress.hand{j}],[0,5],'k-',3);
+    %                 end
+    %                 for ii=1:length(B.cress.puff_peak{j})
+    %                     x=B.cress.puff_peak{j}(ii);
+    %                     plot_signal(B.sensor{1}.peakvalley.matlabtime(x),B.sensor{1}.peakvalley.sample(x),'go',5,offset);
+    %                 end
+    %             end
+    %         end
+    %     end
+    legend_text{i+1}=B.sensor{s}.NAME;
+    %h(i+1)=plot_signal(B.sensor{s}.matlabtime,B.sensor{s}.sampleNorm,color{rem(i,length(color)+1)+1},1,offset);
+    i=i+1;
+end
+
+%	legend(h,legend_text,'Interpreter', 'none');
+xlabel('Time');
+ylabel('Magnitude');
+
+
+
+
+
+
+
+%plot_selfreport(G,pid,sid,'formattedraw',[G.SELFREPORT.SMKID]);
+list_selfreport=[G.SELFREPORT.SMKID];
+for s=list_selfreport
+    hold on;
+    for i=1:length(B.selfreport{s}.matlabtime)
+        hold on;
+        plot_signal([B.selfreport{s}.matlabtime(i),B.selfreport{s}.matlabtime(i)],ylim,'r-',2);
+        hold on;
+        text(B.selfreport{s}.matlabtime(i), 0  , [B.selfreport{s}.NAME ' : ' int2str(i)], 'Color', 'k','FontSize',18,'Rotation',90);
+    end
+end
+filename=['C:\Users\smhssain\Desktop\smoking\figures\_' pid '_' sid '.png'];
+set(gcf,'PaperUnits','inches','PaperSize',[16,10],'PaperPosition',[0 0 16 10])
+print('-dpng','-r100',filename);        
+
+%saveas(hh,filename,'png');
+%print (gcf, '-dbmp', filename)
+
+list_selfreport=[G.SELFREPORT.SMKID];
+for s=list_selfreport
+    hold on;
+    for i=1:length(B.selfreport{s}.matlabtime)
+        stime=B.selfreport{s}.matlabtime(i)-(10/(24*60));
+        etime=B.selfreport{s}.matlabtime(i)+(1/(24*60));
+        xlim([stime,etime]);        
+        filename=['C:\Users\smhssain\Desktop\smoking\figures\_' pid '_' sid '_s' num2str(i) '.png'];
+set(gcf,'PaperUnits','inches','PaperSize',[16,10],'PaperPosition',[0 0 16 10])
+print('-dpng','-r100',filename);        
+%        print (gcf, '-dbmp', filename)
+%    saveas(hh,filename,'png');
+    end
+end
+
+
+noOfSelfReport=length(B.selfreport{s}.matlabtime);
+fprintf('No of self-report = %d\n', noOfSelfReport);
+
+end

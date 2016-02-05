@@ -1,0 +1,14 @@
+datafilename = '../../../data/libsvm_train'
+gammarange = [2**x for x in arange(-10,10,0.1)]
+crange = [2**x for x in arange(-10,10,0.1)]
+doscale = True
+nf = 10
+timeout = 40
+numcpus = 8
+outputlog = '../../../data/results.dat'
+choose_specific_features = False
+specific_selected_features = [range(30)]
+savemodel = True
+testdatafilename = '../../../data/libsvm_test'
+posclass = 'auto'
+useprob = False

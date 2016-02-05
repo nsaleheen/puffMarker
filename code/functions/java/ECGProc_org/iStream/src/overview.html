@@ -1,0 +1,23 @@
+<body>
+This document is API specification for the <i>m-</i>Stream framework.
+<p/>
+<i>m-</i>Stream framework has been designed to streamline processing of time-series data. 
+The general framework permits easy manipulation of time-series data using various operators and streams
+implemented for the purpose. This framework can be easily deployed in any device running Android OS where
+processing of sensor data is to be done. In addition, we provide packages for health-sensor data like ECG and EDA.
+
+<h3>ECG processing </h3>
+<p> The {@link org.mstream.stream.ecg} package provides classes for processing ECG data like noise-removal via smoothing, peak detection and
+feature extraction.
+
+<h3>EDA processing</h3>
+<p> The {@link org.mstream.stream.eda} package provides classes for processing of EDA data.
+
+<h3>General Streaming framework</h3>
+<p> {@link org.mstream.stream}: This is the critical package consisting of interfaces and classes needed for this framework. This package
+supports i) top-down streaming where streams at top receive data from lower streams on-demand, 
+and ii) bottom-up or event-driven streaming (subscriber-producer model) where lower producer streams report data arrival to higer
+subscriber stream. 
+
+@author Abhinav Parate
+</body>

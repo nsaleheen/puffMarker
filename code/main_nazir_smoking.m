@@ -1,0 +1,7 @@
+
+% main_nazir_smoking_A3_WRIST_BIAS_MAGNITUDE;
+main_nazir_smoking_A8_WRIST_ROLLPITCH;
+main_nazir_smoking_B1F__ACL_SEGMENT;
+main_nazir_smoking_B4C1_GYR_SEGMENT_ROLL_PITCH_HEIGHT;
+main_nazir_smoking_B7C2_GYR_FILTER_LENGTH;
+main_nazir_smoking_B8C3_GYR_FILTER_ROLL_PITCH;

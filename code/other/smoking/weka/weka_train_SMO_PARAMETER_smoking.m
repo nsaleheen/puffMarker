@@ -1,0 +1,6 @@
+function weka_train_SMO_PARAMETER_smoking(wekafile,modelfile,outfile,C,G)
+
+s=['java -cp "','C:\Program Files\Weka-3-6\weka.jar',...
+'" weka.classifiers.functions.SMO -i -C ' num2str(C) ' -L 0.0010 -P 1.0E-12 -N 0 -M -V -1 -W 1 -K "weka.classifiers.functions.supportVector.RBFKernel -C 250007 -G ' num2str(G) '" -t ',...
+wekafile,' -d ',modelfile, '> ' ,outfile];
+dos(s);

@@ -1,0 +1,17 @@
+function [f,g]=softmax_obj(W,X,y,params);
+
+[N,nVars] = size(X);
+[N,nClasses] = size(y); 
+wSoftmax = reshape(W,nVars,nClasses-1);
+A = [X*wSoftmax, zeros(N,1)];
+AN = logsum(A,2);
+logP  = bsxfun(@minus,A,AN);
+P     = exp(logP);
+
+Err = y-P;
+f   = sum(sum(y.*logP)) - 0.5*sum(sum(params.lambda.*wSoftmax));
+g   = X'*Err(:,1:end-1) - params.lambda.*wSoftmax; 
+g   = g(:);
+
+f=-f;
+g=-g;

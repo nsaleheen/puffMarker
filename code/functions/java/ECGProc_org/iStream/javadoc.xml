@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="../UtilLibrary/bin:../UtilLibrary/libs/Jama-1.0.3.jar" destdir="doc" doctitle="mStream Framework" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="./src/overview.html" packagenames="org.mstream.stream,org.mstream.stream.items,org.mstream.stream.accelerometer,org.mstream.stream.eda,org.mstream.stream.file,org.mstream.stream.ecg" source="1.6" sourcepath="src" splitindex="true" stylesheetfile="./stylesheet.css" use="true" version="true">
+            <link href="http://download.oracle.com/javase/6/docs/api/"/>
+        </javadoc>
+    </target>
+</project>

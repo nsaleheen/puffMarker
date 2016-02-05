@@ -1,0 +1,16 @@
+% 
+main_monowar_smoking_A2_PEAK_VALLEY_UPDATE;
+main_nazir_smoking_A3_WRIST_BIAS_MAGNITUDE;
+main_nazir_smoking_A8_WRIST_ROLLPITCH;
+main_nazir_smoking_B1F__ACL_SEGMENT;
+main_nazir_smoking_B4C1_GYR_SEGMENT_ROLL_PITCH_HEIGHT;
+main_nazir_smoking_B7C2_GYR_FILTER_LENGTH;
+main_nazir_smoking_B8C3_GYR_FILTER_ROLL_PITCH;
+% main_nazir_smoking_B9_PLOT_MARKING_GYR_ACL_SEGMENT_PUFF;
+%  
+main_nazir_smoking_D1_COMBINE_RIP_GYRO;
+main_monowar_smoking_D2_GROUNDTRUTH_RIP;
+main_nazir_smoking_D3_FEATURE;
+
+main_monowar_smoking_E4_TESTSVM;
+main_monowar_smoking_E5_PLOT_SVM;

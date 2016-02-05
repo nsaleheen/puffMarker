@@ -1,0 +1,109 @@
+
+Options: -C 0.25 -M 2 
+
+J48 pruned tree
+------------------
+
+Upper_Stretch <= 805.799618
+|   Upper_Stretch_ratio <= 2.834665
+|   |   Rate_of_Change_Max_ <= 34.413408: nonpuff (430.0/2.0)
+|   |   Rate_of_Change_Max_ > 34.413408
+|   |   |   RStime-WStime <= 2591.75: nonpuff (88.0)
+|   |   |   RStime-WStime > 2591.75
+|   |   |   |   Wrist_Duration <= 3312.5
+|   |   |   |   |   Pitch_Quartile_ <= 0.874771: puff (6.0/1.0)
+|   |   |   |   |   Pitch_Quartile_ > 0.874771
+|   |   |   |   |   |   Wrist_Duration <= 1625: nonpuff (26.0)
+|   |   |   |   |   |   Wrist_Duration > 1625
+|   |   |   |   |   |   |   Pitch_Mean_ <= 42.472271: nonpuff (11.0)
+|   |   |   |   |   |   |   Pitch_Mean_ > 42.472271
+|   |   |   |   |   |   |   |   Wrist_Duration <= 2812.5
+|   |   |   |   |   |   |   |   |   Stretch <= 1535.24992: nonpuff (11.0/1.0)
+|   |   |   |   |   |   |   |   |   Stretch > 1535.24992: puff (3.0)
+|   |   |   |   |   |   |   |   Wrist_Duration > 2812.5: puff (3.0)
+|   |   |   |   Wrist_Duration > 3312.5: nonpuff (37.0)
+|   Upper_Stretch_ratio > 2.834665
+|   |   Pitch_Quartile_ <= 1.688312
+|   |   |   Magnitude_STD_ <= 42.167725: puff (14.0)
+|   |   |   Magnitude_STD_ > 42.167725: nonpuff (3.0/1.0)
+|   |   Pitch_Quartile_ > 1.688312: nonpuff (16.0)
+Upper_Stretch > 805.799618
+|   Roll_Mean_ <= 47.968487
+|   |   Stretch <= 4133.560059: nonpuff (98.0/1.0)
+|   |   Stretch > 4133.560059
+|   |   |   Magnitude_Mean_ <= 165.273975: puff (7.0)
+|   |   |   Magnitude_Mean_ > 165.273975: nonpuff (7.0)
+|   Roll_Mean_ > 47.968487
+|   |   Magnitude_Mean_ <= 247.434314
+|   |   |   Pitch_Median_ <= 40.244881
+|   |   |   |   Pitch_Quartile_ <= 1.347857: puff (6.0)
+|   |   |   |   Pitch_Quartile_ > 1.347857: nonpuff (16.0/1.0)
+|   |   |   Pitch_Median_ > 40.244881
+|   |   |   |   REtime-WStime <= 10635.625
+|   |   |   |   |   Wrist_Duration <= 875
+|   |   |   |   |   |   Pitch_STD_ <= 3.295823: puff (8.0/1.0)
+|   |   |   |   |   |   Pitch_STD_ > 3.295823: nonpuff (5.0)
+|   |   |   |   |   Wrist_Duration > 875
+|   |   |   |   |   |   Rate_of_Change_Max_ <= 44.284613
+|   |   |   |   |   |   |   Respiration_Duration <= 5531.25: puff (9.0/1.0)
+|   |   |   |   |   |   |   Respiration_Duration > 5531.25: nonpuff (3.0)
+|   |   |   |   |   |   Rate_of_Change_Max_ > 44.284613: puff (215.0/6.0)
+|   |   |   |   REtime-WStime > 10635.625
+|   |   |   |   |   Pitch_Mean_ <= 50.576954: nonpuff (7.0)
+|   |   |   |   |   Pitch_Mean_ > 50.576954
+|   |   |   |   |   |   RStime-WEtime <= 2448.125: puff (10.0/1.0)
+|   |   |   |   |   |   RStime-WEtime > 2448.125: nonpuff (5.0)
+|   |   Magnitude_Mean_ > 247.434314
+|   |   |   Magnitude_Median_ <= 178.928094: puff (3.0)
+|   |   |   Magnitude_Median_ > 178.928094
+|   |   |   |   Roll_STD_ <= 5.569259
+|   |   |   |   |   Expiration_Duration <= 2156.25: puff (2.0)
+|   |   |   |   |   Expiration_Duration > 2156.25: nonpuff (2.0)
+|   |   |   |   Roll_STD_ > 5.569259: nonpuff (27.0)
+
+Number of Leaves  : 	29
+
+Size of the tree : 	57
+
+
+Time taken to build model: 0.13 seconds
+Time taken to test model on training data: 0.03 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances        1062               98.5158 %
+Incorrectly Classified Instances        16                1.4842 %
+Kappa statistic                          0.9618
+Mean absolute error                      0.0275
+Root mean squared error                  0.1173
+Relative absolute error                  7.1149 %
+Root relative squared error             26.6811 %
+Total Number of Instances             1078     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 276   6 |   a = puff
+  10 786 |   b = nonpuff
+
+
+
+=== Stratified cross-validation ===
+
+Correctly Classified Instances         992               92.0223 %
+Incorrectly Classified Instances        86                7.9777 %
+Kappa statistic                          0.7949
+Mean absolute error                      0.0858
+Root mean squared error                  0.2702
+Relative absolute error                 22.2058 %
+Root relative squared error             61.4858 %
+Total Number of Instances             1078     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 242  40 |   a = puff
+  46 750 |   b = nonpuff
+

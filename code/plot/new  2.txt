@@ -1,0 +1,41 @@
+Data Structure for the matlab file (.mat):
+
+Accessing sensor data:
+----------------------
+
+samples from sensor indicated by 'id': C.sensor{id}.sample
+
+Unix timestamp (corresponding to each sample): C.sensor{id}.timestamp
+
+Matlab Time (corresponding to each sample): C.sensor{id}.matlabtime
+
+
+'id' for each sensor:
+---------------------
+Respiration: id = 1
+
+Wrist (Left) Accelerometer x-axis, y-axis, z-axis: id = 27, 28, 29
+Wrist (Left) Gyroscope x-axis, y-axis, z-axis: id = 30, 31, 32
+
+Wrist (Right) Accelerometer x-axis, y-axis, z-axis: id = 33, 34, 35
+Wrist (Right) Gyroscope x-axis, y-axis, z-axis: id = 36, 37, 38
+
+
+Peak valley for each cycle of the respiration signal:
+----------------------------------------------------
+Amplitude: C.sensor{1}.peakvalley.sample 
+(odd indices in 'sample' contain amplitude of valley, even indices contain that of peak)
+
+timestamp: C.sensor{1}.peakvalley.timestamp 
+(corresponding timestamps of valley and peak locations)
+
+
+Puff marking in controlled environment:
+---------------------------------------
+Start of the smoking episode: C.smoking_episode.stattimestamp
+End of the smoking episode: C.smoking_episode.endimestamp
+Timestamp of left hand up: C.smoking_episode.timestamp_handL(1, 3, ...)
+Timestamp of left hand down: C.smoking_episode.timestamp_handL(2, 4, ...)
+Timestamp of right hand up: C.smoking_episode.timestamp_handR(1, 3, ...)
+Timestamp of right hand down: C.smoking_episode.timestamp_handR(2, 4, ...)
+Valley of the respiration cycle (index of peak valley array) for smoking puff: C.smoking_episode.puff.ind_rip_valley
