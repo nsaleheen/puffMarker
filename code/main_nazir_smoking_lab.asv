@@ -1,4 +1,4 @@
- main_monowar_smoking_A1_RAW_FORMATTEDDATA
+main_monowar_smoking_A1_RAW_FORMATTEDDATA
 main_monowar_smoking_A2_PEAK_VALLEY_UPDATE;
 main_nazir_smoking_A3_WRIST_BIAS_MAGNITUDE;
 main_nazir_smoking_A8_WRIST_ROLLPITCH;
@@ -11,5 +11,6 @@ main_nazir_smoking_B8C3_GYR_FILTER_ROLL_PITCH;
 main_nazir_smoking_D1_COMBINE_RIP_GYRO;
 main_nazir_smoking_D3_FEATURE;
 
+main_monowar_smoking_E1_CREATE_TRAIN_DATASET;
 main_monowar_smoking_E4_TESTSVM;
 main_monowar_smoking_E5_PLOT_SVM;
